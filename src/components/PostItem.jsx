@@ -1,21 +1,28 @@
+import { useHistory } from "react-router-dom";
 import React from 'react';
 import MyButton from "./UI/button/MyButton";
 
-const PostItem = (props) => {
+const PostItem = ({ post, remove }) => {
+	let history = useHistory();
+
 
 	return (
 		<div className="post">
 			<div className="post__content">
-				<strong>{props.post.id}. {props.post.title}</strong>
+				<strong>{post.id}. {post.title}</strong>
 				<div>
-					{props.post.body}
+					{post.body}
 				</div>
 			</div>
 			<div className="post__btns">
-				<MyButton>
+				<MyButton
+					onClick={() => history.push(`/posts/${post.id}`)}
+				>
 					Открыть
 				</MyButton>
-				<MyButton>
+				<MyButton
+					onClick={() => remove(post)}
+				>
 					Удалить
 				</MyButton>
 			</div>
