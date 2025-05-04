@@ -6,7 +6,7 @@ import PostPage from "../pages/PostPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUsers } from "../store/reducers/ActionCreator";
-
+import PostContainer from "./PostContainer";
 
 function AppRouter() {
 	return (
@@ -32,22 +32,22 @@ function AppRouter() {
 }
 
 const Home = () => {
-	const { users, isLoading, error } = useSelector((state) => state.userReducer);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(fetchUsers());
-	}, []);
-
-	console.log(`error`, error);
+	// const { users, isLoading, error } = useSelector((state) => state.userReducer);
+	// const dispatch = useDispatch();
+	/* 
+		useEffect(() => {
+			dispatch(fetchUsers());
+		}, []); */
 
 	return <div>
 		<h1>Home page!</h1>
-		{error && <h2>{error}</h2>}
+		{/* {error && <h2>{error}</h2>} */}
 
-		{isLoading && <h2>Loading...</h2>}
+		{/* {isLoading && <h2>Loading...</h2>} */}
 
-		{JSON.stringify(users, null, 2)}
+		{/* {JSON.stringify(users, null, 2)} */}
+
+		<PostContainer />
 	</div>
 }
 
