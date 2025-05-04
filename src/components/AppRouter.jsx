@@ -3,6 +3,10 @@ import About from "../pages/About";
 import Posts from "../pages/Posts";
 import Error from "../pages/Error";
 import PostPage from "../pages/PostPage";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchUsers } from "../store/reducers/ActionCreator";
+
 
 function AppRouter() {
 	return (
@@ -28,7 +32,23 @@ function AppRouter() {
 }
 
 const Home = () => {
-	return <h1>Home page!</h1>;
+	const { users, isLoading, error } = useSelector((state) => state.userReducer);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchUsers());
+	}, []);
+
+	console.log(`error`, error);
+
+	return <div>
+		<h1>Home page!</h1>
+		{error && <h2>{error}</h2>}
+
+		{isLoading && <h2>Loading...</h2>}
+
+		{JSON.stringify(users, null, 2)}
+	</div>
 }
 
 export default AppRouter;
